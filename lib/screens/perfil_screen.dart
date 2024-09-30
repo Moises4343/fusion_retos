@@ -119,10 +119,14 @@ class PerfilScreen extends StatelessWidget {
     await launchUrl(launchUri);
   }
 
-  // Método para abrir el perfil de GitHub
   void _openGitHubProfile(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
+    final Uri launchUri = Uri.parse(url);
+
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(
+        launchUri,
+        mode: LaunchMode.inAppWebView,
+      );
     } else {
       throw 'No se puede abrir $url';
     }
