@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class TaskService {
-  final String baseUrl = 'http://127.0.0.1:3000/tasks';
+  final String baseUrl = 'https://tareas-api-cm2v.onrender.com/tasks';
 
   // Obtener todas las tareas
   Future<List<Map<String, dynamic>>> getTasks() async {

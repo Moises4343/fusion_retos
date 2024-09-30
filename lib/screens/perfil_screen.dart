@@ -9,8 +9,7 @@ class PerfilScreen extends StatelessWidget {
         title: const Text('Mis Datos'),
       ),
       body: SingleChildScrollView(
-        scrollDirection:
-            Axis.horizontal, // Habilita el scroll horizontal para la tabla
+        scrollDirection: Axis.horizontal,
         child: DataTable(
           columns: const <DataColumn>[
             DataColumn(
@@ -53,11 +52,12 @@ class PerfilScreen extends StatelessWidget {
           rows: <DataRow>[
             _buildDataRow(
               context,
-              imageUrl: 'lib/img/moises.jpg',
+              imageUrl:
+                  'https://raw.githubusercontent.com/Moises4343/fusion_retos/refs/heads/main/lib/img/moises.jpg',
               name: 'Moisés Anzueto',
               matricula: '193243',
               phoneNumber: '961-326-7127',
-              githubUrl: 'https://github.com/Moises4343',
+              githubUrl: 'https://github.com/Moises4343/fusion_retos',
             ),
           ],
         ),
@@ -75,7 +75,7 @@ class PerfilScreen extends StatelessWidget {
     return DataRow(
       cells: <DataCell>[
         DataCell(
-          Image.network(imageUrl, width: 50, height: 50), // Imagen del alumno
+          Image.network(imageUrl, width: 50, height: 50),
         ),
         DataCell(Text(name)),
         DataCell(Text(matricula)),
