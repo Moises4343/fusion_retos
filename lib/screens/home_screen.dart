@@ -29,11 +29,11 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('HOME'),
+        title: const Text('HOME'),
         centerTitle: true,
         bottom: TabBar(
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Mi Perfil', icon: Icon(Icons.person)),
             Tab(text: 'Tareas', icon: Icon(Icons.task)),
             Tab(text: 'Pokedex', icon: Icon(Icons.catching_pokemon)),

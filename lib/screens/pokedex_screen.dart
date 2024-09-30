@@ -11,7 +11,7 @@ class PokedexScreen extends StatefulWidget {
 class _PokedexScreenState extends State<PokedexScreen> {
   Future<Map<String, dynamic>> fetchPokemonData() async {
     final response = await http
-        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon/1')); // Bulbasaur
+        .get(Uri.parse('https://pokeapi.co/api/v2/pokemon/399')); // Bulbasaur
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
