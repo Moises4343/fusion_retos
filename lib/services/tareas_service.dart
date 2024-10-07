@@ -12,7 +12,7 @@ class TaskService {
       final List<dynamic> taskList = json.decode(response.body);
       return taskList
           .map((task) => {'id': task['id'], 'task': task['task']})
-          .toList(); // Retorna una lista con ID y contenido de la tarea
+          .toList();
     } else {
       throw Exception('Error al cargar las tareas');
     }

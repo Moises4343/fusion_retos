@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:url_launcher/url_launcher.dart'; // Importa para abrir Google Maps
+import 'package:url_launcher/url_launcher.dart';
 
 class GPSStatusScreen extends StatefulWidget {
   @override
@@ -11,8 +11,8 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
   String _gpsStatus = "Comprobando el estado del GPS...";
   IconData _statusIcon = Icons.location_searching;
   Color _iconColor = Colors.blue;
-  Position? _position; // Almacenar la posición actual
-  bool _isLoading = false; // Controlar el estado de carga
+  Position? _position;
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -22,7 +22,7 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
 
   Future<void> _checkGPSStatus() async {
     setState(() {
-      _isLoading = true; // Muestra el indicador de carga
+      _isLoading = true;
       _gpsStatus = "Comprobando el estado del GPS...";
       _statusIcon = Icons.location_searching;
       _iconColor = Colors.blue;
@@ -81,7 +81,7 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
       print('isMocked: $isMocked');
 
       setState(() {
-        _position = position; // Almacenar la posición actual
+        _position = position;
         if (isMocked) {
           _gpsStatus = "Advertencia: ¡La ubicación está siendo falsificada!";
           _statusIcon = Icons.error;
@@ -91,7 +91,7 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
           _statusIcon = Icons.check_circle;
           _iconColor = Colors.green;
         }
-        _isLoading = false; // Detener el indicador de carga
+        _isLoading = false;
       });
     } catch (e) {
       setState(() {
@@ -126,7 +126,6 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Card que muestra el estado del GPS
             Card(
               elevation: 8.0,
               shape: RoundedRectangleBorder(
@@ -155,7 +154,6 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
                     ),
                     const SizedBox(height: 16),
                     const Divider(),
-                    // Mostrar latitud y longitud en forma de lista
                     if (_position != null && !_isLoading)
                       Column(
                         children: [
@@ -180,14 +178,12 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            // Botón para refrescar el estado del GPS
             ElevatedButton.icon(
               onPressed: _checkGPSStatus,
               icon: const Icon(Icons.refresh),
               label: const Text('Actualizar estado del GPS'),
             ),
             const SizedBox(height: 16),
-            // Botón para abrir Google Maps con las coordenadas
             ElevatedButton.icon(
               onPressed: _openGoogleMaps,
               icon: const Icon(Icons.location_on),

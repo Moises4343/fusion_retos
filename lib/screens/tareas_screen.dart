@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../services/tareas_service.dart'; // Importa el servicio de tareas
+import '../services/tareas_service.dart';
 
 class TareasScreen extends StatefulWidget {
   @override
@@ -8,18 +8,16 @@ class TareasScreen extends StatefulWidget {
 }
 
 class _TareasScreenState extends State<TareasScreen> {
-  final TaskService taskService = TaskService(); // Instancia del servicio
-  List<Map<String, dynamic>> tasks = []; // Lista de tareas con ID y contenido
+  final TaskService taskService = TaskService();
+  List<Map<String, dynamic>> tasks = [];
   String newTask = '';
-  int?
-      selectedTaskId; // Almacena el ID de la tarea seleccionada para actualizar
-  final TextEditingController _taskController =
-      TextEditingController(); // Controlador del campo de texto
+  int? selectedTaskId;
+  final TextEditingController _taskController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _fetchTasks(); // Cargar las tareas al iniciar la vista
+    _fetchTasks();
   }
 
   // Obtener todas las tareas de la API
@@ -27,7 +25,7 @@ class _TareasScreenState extends State<TareasScreen> {
     try {
       final taskList = await taskService.getTasks();
       setState(() {
-        tasks = taskList; // Cargar la lista de tareas con IDs
+        tasks = taskList;
       });
     } catch (e) {
       print('Error al cargar las tareas: $e');
@@ -38,8 +36,8 @@ class _TareasScreenState extends State<TareasScreen> {
   Future<void> _addTask(String task) async {
     try {
       await taskService.addTask(task);
-      _fetchTasks(); // Refrescar la lista de tareas después de agregar
-      _taskController.clear(); // Limpiar el campo de entrada
+      _fetchTasks();
+      _taskController.clear();
     } catch (e) {
       print('Error al agregar la tarea: $e');
     }
@@ -48,12 +46,11 @@ class _TareasScreenState extends State<TareasScreen> {
   // Actualizar una tarea existente
   Future<void> _updateTask(int taskId, String task) async {
     try {
-      await taskService.updateTask(
-          taskId, task); // Llama al servicio para actualizar
-      _fetchTasks(); // Refrescar la lista de tareas después de actualizar
+      await taskService.updateTask(taskId, task);
+      _fetchTasks();
       setState(() {
-        selectedTaskId = null; // Limpiar la selección después de actualizar
-        _taskController.clear(); // Limpiar el campo de entrada
+        selectedTaskId = null;
+        _taskController.clear();
       });
     } catch (e) {
       print('Error al actualizar la tarea: $e');
@@ -63,9 +60,8 @@ class _TareasScreenState extends State<TareasScreen> {
   // Eliminar una tarea
   Future<void> _deleteTask(int taskId) async {
     try {
-      await taskService
-          .deleteTask(taskId); // Eliminar la tarea usando su ID real
-      _fetchTasks(); // Refrescar la lista de tareas después de eliminar
+      await taskService.deleteTask(taskId);
+      _fetchTasks();
     } catch (e) {
       print('Error al eliminar la tarea: $e');
     }
@@ -82,14 +78,14 @@ class _TareasScreenState extends State<TareasScreen> {
         child: Column(
           children: [
             TextField(
-              controller: _taskController, // Usar el controlador creado
+              controller: _taskController,
               decoration: const InputDecoration(
                 labelText: 'Agregar/Actualizar tarea',
                 border: OutlineInputBorder(),
               ),
               onChanged: (value) {
                 setState(() {
-                  newTask = value; // Actualiza el valor de la tarea
+                  newTask = value;
                 });
               },
             ),
@@ -98,10 +94,9 @@ class _TareasScreenState extends State<TareasScreen> {
               onPressed: () {
                 if (newTask.isNotEmpty) {
                   if (selectedTaskId == null) {
-                    _addTask(newTask); // Agregar nueva tarea
+                    _addTask(newTask);
                   } else {
-                    _updateTask(
-                        selectedTaskId!, newTask); // Actualizar tarea existente
+                    _updateTask(selectedTaskId!, newTask);
                   }
                 }
               },
@@ -114,12 +109,10 @@ class _TareasScreenState extends State<TareasScreen> {
               child: ListView.builder(
                 itemCount: tasks.length,
                 itemBuilder: (context, index) {
-                  final task = tasks[index]; // Tarea actual con ID y contenido
+                  final task = tasks[index];
                   return Container(
                     decoration: BoxDecoration(
-                      color: index % 2 == 0
-                          ? Colors.grey[300] // Color gris claro alternado
-                          : Colors.white, // Alternancia de colores
+                      color: index % 2 == 0 ? Colors.grey[300] : Colors.white,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey.withOpacity(0.5),
@@ -130,31 +123,24 @@ class _TareasScreenState extends State<TareasScreen> {
                       ],
                     ),
                     child: ListTile(
-                      title: Text(
-                          task['task']), // Mostrar el contenido de la tarea
+                      title: Text(task['task']),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(
-                            icon: const Icon(
-                                Icons.edit), // Ícono de lápiz para editar
+                            icon: const Icon(Icons.edit),
                             onPressed: () {
                               setState(() {
-                                newTask = task[
-                                    'task']; // Llenar el campo de texto con la tarea seleccionada
-                                selectedTaskId = task[
-                                    'id']; // Guardar el ID de la tarea seleccionada
-                                _taskController.text =
-                                    newTask; // Establecer el texto del controlador
+                                newTask = task['task'];
+                                selectedTaskId = task['id'];
+                                _taskController.text = newTask;
                               });
                             },
                           ),
                           IconButton(
-                            icon: const Icon(
-                                Icons.delete), // Ícono de basura para eliminar
+                            icon: const Icon(Icons.delete),
                             onPressed: () {
-                              _deleteTask(task[
-                                  'id']); // Llamar a la función de eliminar tarea
+                              _deleteTask(task['id']);
                             },
                           ),
                         ],
