@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'gps_detector_screen.dart'; // Importa la nueva pantalla de GPS
 import 'perfil_screen.dart';
 import 'pokedex_screen.dart';
 import 'tareas_screen.dart';
@@ -16,7 +17,8 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController =
+        TabController(length: 4, vsync: this); // Cambia la longitud a 4
   }
 
   @override
@@ -37,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen>
             Tab(text: 'Mi Perfil', icon: Icon(Icons.person)),
             Tab(text: 'Tareas', icon: Icon(Icons.task)),
             Tab(text: 'Pokedex', icon: Icon(Icons.catching_pokemon)),
+            Tab(text: 'GPS', icon: Icon(Icons.gps_fixed)), // Nueva pestaña GPS
           ],
         ),
       ),
@@ -46,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
           PerfilScreen(), // Pantalla Mi Perfil
           TareasScreen(), // Pantalla Tareas
           PokedexScreen(), // Pantalla Pokedex
+          GPSStatusScreen(), // Pantalla GPS Detector
         ],
       ),
     );
