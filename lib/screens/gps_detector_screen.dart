@@ -69,7 +69,7 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
       return;
     }
 
-    // Obtén la ubicación actual
+    // Obtener la ubicación actual
     try {
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high);
@@ -77,7 +77,6 @@ class _GPSStatusScreenState extends State<GPSStatusScreen> {
       // Verificar si la ubicación es falsa
       bool isMocked = position.isMocked;
 
-      // Depurar para asegurarnos de lo que devuelve isMocked
       print('isMocked: $isMocked');
 
       setState(() {
