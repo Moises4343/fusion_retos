@@ -55,7 +55,7 @@ class PerfilScreen extends StatelessWidget {
             _buildDataRow(
               context,
               imageUrl:
-                  'https://raw.githubusercontent.com/Moises4343/fusion_retos/refs/heads/main/lib/img/moises.jpg',
+                  'https://raw.githubusercontent.com/Moises4343/fusion_retos/refs/heads/main/lib/img/UP.jpeg',
               name: 'Moisés Anzueto',
               matricula: '193243',
               phoneNumber: '961-326-7127',
