@@ -3,19 +3,18 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MFAService {
-  //final String baseUrl = 'https://tareas-api-cm2v.onrender.com';
-  final String baseUrl = 'http://127.0.0.1:3000';
+  final String baseUrl = 'http://52.201.130.10:8000';
 
   // Registro de usuario
   Future<void> registerUser(
-      String username, String password, String phoneNumber) async {
+      String username, String password, String phone) async {
     final response = await http.post(
       Uri.parse('$baseUrl/api/auth/register'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
         'username': username,
         'password': password,
-        'phone_number': phoneNumber,
+        'phone': phone,
       }),
     );
 
@@ -41,17 +40,21 @@ class MFAService {
   }
 
   // Verificación del OTP
-  Future<String> verifyOTP(String otp) async {
+  Future<String> verifyOTP(String username, String otp) async {
     final response = await http.post(
       Uri.parse('$baseUrl/api/auth/verify-otp'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode({'otp': otp}),
+      body: json.encode({
+        'username': username,
+        'otp': otp,
+      }),
     );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return data['token'];
     } else {
+      print('Error en la verificación del OTP: ${response.body}');
       throw Exception('OTP inválido o expirado');
     }
   }
