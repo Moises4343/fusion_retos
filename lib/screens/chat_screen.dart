@@ -20,6 +20,7 @@ class _ChatScreenState extends State<ChatScreen> {
   List<Map<String, String>> _messages = [];
   late GenerativeModel _model;
   bool _isConnected = false;
+  bool _isBotTyping = false;
 
   @override
   void initState() {
@@ -87,12 +88,28 @@ class _ChatScreenState extends State<ChatScreen> {
     _controller.clear();
     await _saveMessages();
 
+    // Mostrar puntos suspensivos
+    setState(() {
+      _isBotTyping = true;
+      _messages.add({'role': 'bot', 'content': '...'});
+    });
+
     try {
       final response = await _model.generateContent([Content.text(message)]);
       final botResponse = response.text ?? 'Lo siento, no entendí eso.';
-      _addMessage('bot', botResponse);
+
+      // Reemplazar puntos suspensivos con la respuesta real
+      setState(() {
+        _isBotTyping = false;
+        _messages.removeLast(); // Eliminar "..."
+        _addMessage('bot', botResponse);
+      });
     } catch (e) {
-      _addMessage('bot', 'Hubo un error. Intenta nuevamente.');
+      setState(() {
+        _isBotTyping = false;
+        _messages.removeLast(); // Eliminar "..."
+        _addMessage('bot', 'Hubo un error. Intenta nuevamente.');
+      });
       print('Error: $e');
     }
 
@@ -135,6 +152,17 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ),
+          if (_isBotTyping)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'El bot está escribiendo...',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
