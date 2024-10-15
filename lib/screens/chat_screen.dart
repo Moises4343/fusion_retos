@@ -48,11 +48,8 @@ class _ChatScreenState extends State<ChatScreen> {
   Future<void> _checkRealInternetConnection() async {
     try {
       final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        _updateConnectionStatus(true);
-      } else {
-        _updateConnectionStatus(false);
-      }
+      _updateConnectionStatus(
+          result.isNotEmpty && result[0].rawAddress.isNotEmpty);
     } catch (_) {
       _updateConnectionStatus(false);
     }
@@ -88,32 +85,44 @@ class _ChatScreenState extends State<ChatScreen> {
     _controller.clear();
     await _saveMessages();
 
-    // Mostrar puntos suspensivos
     setState(() {
       _isBotTyping = true;
       _messages.add({'role': 'bot', 'content': '...'});
     });
 
     try {
-      final response = await _model.generateContent([Content.text(message)]);
+      // Preparar contexto con los últimos 5 mensajes
+      final context = _getLimitedContext(5);
+
+      // Enviar el contexto a la API
+      final response = await _model.generateContent([Content.text(context)]);
       final botResponse = response.text ?? 'Lo siento, no entendí eso.';
 
-      // Reemplazar puntos suspensivos con la respuesta real
       setState(() {
         _isBotTyping = false;
-        _messages.removeLast(); // Eliminar "..."
+        _messages.removeLast();
         _addMessage('bot', botResponse);
       });
     } catch (e) {
       setState(() {
         _isBotTyping = false;
-        _messages.removeLast(); // Eliminar "..."
+        _messages.removeLast();
         _addMessage('bot', 'Hubo un error. Intenta nuevamente.');
       });
       print('Error: $e');
     }
 
     await _saveMessages();
+  }
+
+  // Método para obtener un subconjunto limitado del contexto
+  String _getLimitedContext(int limit) {
+    final start = _messages.length > limit ? _messages.length - limit : 0;
+    final recentMessages = _messages.sublist(start);
+
+    return recentMessages
+        .map((msg) => "${msg['role']}: ${msg['content']}")
+        .join('\n');
   }
 
   void _addMessage(String role, String content) {
@@ -153,8 +162,8 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           if (_isBotTyping)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
