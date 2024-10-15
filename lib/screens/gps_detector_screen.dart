@@ -3,6 +3,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GPSStatusScreen extends StatefulWidget {
+  const GPSStatusScreen({super.key});
+
   @override
   _GPSStatusScreenState createState() => _GPSStatusScreenState();
 }

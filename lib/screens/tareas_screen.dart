@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../services/tareas_service.dart';
 
 class TareasScreen extends StatefulWidget {
+  const TareasScreen({super.key});
+
   @override
   _TareasScreenState createState() => _TareasScreenState();
 }

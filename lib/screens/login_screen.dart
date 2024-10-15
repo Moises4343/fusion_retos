@@ -7,6 +7,8 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final MFAService mfaService = MFAService();
 
+  LoginScreen({super.key});
+
   Future<void> login(BuildContext context) async {
     try {
       await mfaService.login(
@@ -66,12 +68,12 @@ class LoginScreen extends StatelessWidget {
                     const SizedBox(height: 32),
                     ElevatedButton(
                       onPressed: () => login(context),
-                      child: const Text('Iniciar sesión'),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 32, vertical: 16),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
+                      child: const Text('Iniciar sesión'),
                     ),
                   ],
                 ),

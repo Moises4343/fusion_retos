@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class PokedexScreen extends StatefulWidget {
+  const PokedexScreen({super.key});
+
   @override
   _PokedexScreenState createState() => _PokedexScreenState();
 }

@@ -9,6 +9,8 @@ class OTPScreen extends StatelessWidget {
   final List<TextEditingController> otpControllers =
       List.generate(6, (_) => TextEditingController());
 
+  OTPScreen({super.key});
+
   Future<void> verifyOTP(BuildContext context) async {
     try {
       String otp = otpControllers.map((e) => e.text).join();
@@ -61,12 +63,12 @@ class OTPScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   ElevatedButton(
                     onPressed: () => verifyOTP(context),
-                    child: const Text('Verificar OTP'),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 32, vertical: 16),
                       textStyle: const TextStyle(fontSize: 18),
                     ),
+                    child: const Text('Verificar OTP'),
                   ),
                 ],
               ),

@@ -8,6 +8,8 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController phoneController = TextEditingController();
   final MFAService mfaService = MFAService();
 
+  RegisterScreen({super.key});
+
   Future<void> registerUser(BuildContext context) async {
     try {
       await mfaService.registerUser(
@@ -73,12 +75,12 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(height: 32),
                     ElevatedButton(
                       onPressed: () => registerUser(context),
-                      child: const Text('Registrar Usuario'),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 32, vertical: 16),
                         textStyle: const TextStyle(fontSize: 18),
                       ),
+                      child: const Text('Registrar Usuario'),
                     ),
                   ],
                 ),
