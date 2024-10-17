@@ -2,19 +2,38 @@ import 'package:flutter/material.dart';
 
 import '../services/mfa_service.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
+  RegisterScreen({super.key});
+
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final MFAService mfaService = MFAService();
 
-  RegisterScreen({super.key});
+  bool _isPasswordVisible = false;
 
   Future<void> registerUser(BuildContext context) async {
+    final String password = passwordController.text;
+
+    if (password.length < 8 || !password.contains(RegExp(r'[A-Z]'))) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              'La contraseña debe tener al menos 8 caracteres y una letra mayúscula.'),
+        ),
+      );
+      return;
+    }
+
     try {
       await mfaService.registerUser(
         usernameController.text,
-        passwordController.text,
+        password,
         phoneController.text,
       );
       ScaffoldMessenger.of(context).showSnackBar(
@@ -58,11 +77,23 @@ class RegisterScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     TextField(
                       controller: passwordController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Contraseña',
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
                       ),
-                      obscureText: true,
+                      obscureText: !_isPasswordVisible,
                     ),
                     const SizedBox(height: 16),
                     TextField(

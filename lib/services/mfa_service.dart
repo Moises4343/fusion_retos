@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class MFAService {
-  final String baseUrl = 'http://52.201.130.10:8000';
+  final String baseUrl = 'http://52.91.181.119:8000';
 
   // Registro de usuario
   Future<void> registerUser(
