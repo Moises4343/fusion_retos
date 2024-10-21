@@ -11,55 +11,117 @@ class PerfilScreen extends StatelessWidget {
         title: const Text('Mis Datos'),
       ),
       body: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: DataTable(
-          columns: const <DataColumn>[
-            DataColumn(
-              label: Text(
-                'Imagen',
-                style: TextStyle(fontStyle: FontStyle.italic),
+        child: Column(
+          children: [
+            Card(
+              elevation: 4.0,
+              margin: const EdgeInsets.all(12.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nombre completo:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 6),
+                    Text('Moisés De Jesús Anzueto González'),
+                    SizedBox(height: 12),
+                    Text(
+                      'Cuatrimestre y grupo:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 6),
+                    Text('9°B'),
+                    SizedBox(height: 12),
+                    Text(
+                      'Número de teléfono:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 6),
+                    Text('961-326-7127'),
+                    SizedBox(height: 12),
+                    Text(
+                      'Correo electrónico:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 6),
+                    Text('193243@ids.upchiapas.edu.mx'),
+                  ],
+                ),
               ),
             ),
-            DataColumn(
-              label: Text(
-                'Nombre',
-                style: TextStyle(fontStyle: FontStyle.italic),
+
+            // Tabla con los datos
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                columns: const <DataColumn>[
+                  DataColumn(
+                    label: Text(
+                      'Imagen',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Nombre',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Matrícula',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Llamar',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Mensaje',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'GitHub',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
+                rows: <DataRow>[
+                  _buildDataRow(
+                    context,
+                    imageUrl:
+                        'https://raw.githubusercontent.com/Moises4343/fusion_retos/refs/heads/main/lib/img/UP.jpeg',
+                    name: 'Moisés Anzueto',
+                    matricula: '193243',
+                    phoneNumber: '961-326-7127',
+                    githubUrl: 'https://github.com/Moises4343/fusion_retos',
+                  ),
+                ],
               ),
-            ),
-            DataColumn(
-              label: Text(
-                'Matrícula',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Llamar',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Mensaje',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'GitHub',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-          ],
-          rows: <DataRow>[
-            _buildDataRow(
-              context,
-              imageUrl:
-                  'https://raw.githubusercontent.com/Moises4343/fusion_retos/refs/heads/main/lib/img/UP.jpeg',
-              name: 'Moisés Anzueto',
-              matricula: '193243',
-              phoneNumber: '961-326-7127',
-              githubUrl: 'https://github.com/Moises4343/fusion_retos',
             ),
           ],
         ),

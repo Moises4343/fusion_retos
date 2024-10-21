@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../services/mfa_service.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key});
+  const RegisterScreen({super.key});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();

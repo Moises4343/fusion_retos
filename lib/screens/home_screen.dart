@@ -5,6 +5,8 @@ import 'chat_screen.dart';
 import 'gps_detector_screen.dart';
 import 'perfil_screen.dart';
 import 'pokedex_screen.dart';
+import 'qr_generate_screen.dart';
+import 'qr_screen.dart';
 import 'tareas_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
+    _tabController = TabController(length: 8, vsync: this);
   }
 
   @override
@@ -36,25 +38,37 @@ class _HomeScreenState extends State<HomeScreen>
       appBar: AppBar(
         title: const Text('HOME'),
         centerTitle: true,
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'Mi Perfil', icon: Icon(Icons.person)),
-            Tab(text: 'Tareas', icon: Icon(Icons.task)),
-            Tab(text: 'Pokedex', icon: Icon(Icons.catching_pokemon)),
-            Tab(text: 'GPS', icon: Icon(Icons.gps_fixed)),
-            Tab(text: 'Chatbot', icon: FaIcon(FontAwesomeIcons.robot)),
-          ],
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48.0),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: TabBar(
+              controller: _tabController,
+              isScrollable: true,
+              tabs: const [
+                Tab(text: 'Mi Perfil', icon: Icon(Icons.person)),
+                Tab(text: 'Tareas', icon: Icon(Icons.task)),
+                Tab(text: 'Pokedex', icon: Icon(Icons.catching_pokemon)),
+                Tab(text: 'GPS', icon: Icon(Icons.gps_fixed)),
+                Tab(text: 'Chatbot', icon: FaIcon(FontAwesomeIcons.robot)),
+                Tab(text: 'QR-Camera', icon: Icon(Icons.camera_alt)),
+                Tab(text: 'QR-Generate', icon: Icon(Icons.qr_code)),
+                Tab(text: 'Sensor', icon: Icon(Icons.sensors)),
+              ],
+            ),
+          ),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
         children: [
-          PerfilScreen(),
-          TareasScreen(),
-          PokedexScreen(),
-          GPSStatusScreen(),
-          ChatScreen(),
+          const PerfilScreen(),
+          const TareasScreen(),
+          const PokedexScreen(),
+          const GPSStatusScreen(),
+          const ChatScreen(),
+          QRScreen(),
+          QRGenerateScreen(),
         ],
       ),
     );
