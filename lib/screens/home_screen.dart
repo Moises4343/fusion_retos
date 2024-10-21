@@ -7,6 +7,7 @@ import 'perfil_screen.dart';
 import 'pokedex_screen.dart';
 import 'qr_generate_screen.dart';
 import 'qr_screen.dart';
+import 'sensor_screen.dart';
 import 'tareas_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -69,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
           const ChatScreen(),
           QRScreen(),
           QRGenerateScreen(),
+          SensorScreen(),
         ],
       ),
     );
