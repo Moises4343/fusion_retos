@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fusion_retos_c1/screens/note_screen.dart';
 
 import 'chat_screen.dart';
 import 'gps_detector_screen.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 8, vsync: this);
+    _tabController = TabController(length: 9, vsync: this);
   }
 
   @override
@@ -55,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Tab(text: 'QR-Camera', icon: Icon(Icons.camera_alt)),
                 Tab(text: 'QR-Generate', icon: Icon(Icons.qr_code)),
                 Tab(text: 'Sensor', icon: Icon(Icons.sensors)),
+                Tab(text: 'Notes', icon: FaIcon(FontAwesomeIcons.noteSticky)),
               ],
             ),
           ),
@@ -71,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen>
           QRScreen(),
           QRGenerateScreen(),
           SensorScreen(),
+          NoteScreen(),
         ],
       ),
     );

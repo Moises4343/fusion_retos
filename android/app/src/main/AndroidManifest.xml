@@ -9,6 +9,8 @@
     <!--Permiso para la camara-->
     <uses-permission android:name="android.permission.CAMERA"/>
 
+    <!--Permiso para el microfono-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:label="fusion_retos_c1"
@@ -53,6 +55,9 @@
             <action android:name="android.intent.action.VIEW"/>
             <category android:name="android.intent.category.BROWSABLE"/>
             <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
         </intent>
     </queries>
 </manifest>

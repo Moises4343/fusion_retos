@@ -9,22 +9,16 @@ class SensorScreen extends StatefulWidget {
 }
 
 class _SensorScreenState extends State<SensorScreen> {
-  // Variables para almacenar los valores del acelerómetro
   double x = 0.0, y = 0.0, z = 0.0;
 
-  // Variables para almacenar los valores del giroscopio
   double gyroX = 0.0, gyroY = 0.0, gyroZ = 0.0;
 
-  // Variables para almacenar los valores del magnetómetro
   double magX = 0.0, magY = 0.0, magZ = 0.0;
 
-  // Posición de la bola en la pantalla
   double posX = 0.0, posY = 0.0;
 
-  // Tamaño de la bola
   final double ballSize = 50.0;
 
-  // Dimensiones del área de juego
   double gameAreaWidth = 0.0;
   double gameAreaHeight = 0.0;
 
@@ -33,10 +27,8 @@ class _SensorScreenState extends State<SensorScreen> {
   StreamSubscription<GyroscopeEvent>? _gyroscopeSubscription;
   StreamSubscription<MagnetometerEvent>? _magnetometerSubscription;
 
-  // Bandera para inicializar la posición una sola vez
   bool isPositionInitialized = false;
 
-  // GlobalKey para obtener el contexto del área de juego
   final GlobalKey _gameAreaKey = GlobalKey();
 
   @override
@@ -52,17 +44,14 @@ class _SensorScreenState extends State<SensorScreen> {
         z = event.z;
 
         if (isPositionInitialized) {
-          // Ajustamos la sensibilidad multiplicando por un factor
           double sensitivity = 2.0;
 
           posX += (-x * sensitivity);
           posY += (y * sensitivity);
 
-          // Limitar la posición para que la bola no se salga del área de juego
           posX = posX.clamp(0.0, gameAreaWidth - ballSize);
           posY = posY.clamp(0.0, gameAreaHeight - ballSize);
 
-          // Detectar si la bola ha tocado los bordes (ha caído)
           if (posX <= 0.0 ||
               posX >= gameAreaWidth - ballSize ||
               posY <= 0.0 ||
@@ -73,7 +62,6 @@ class _SensorScreenState extends State<SensorScreen> {
       });
     });
 
-    // Inicializar la posición de la bola después de construir el widget
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final RenderBox? renderBox =
           _gameAreaKey.currentContext?.findRenderObject() as RenderBox?;
@@ -202,21 +190,18 @@ class _SensorScreenState extends State<SensorScreen> {
                 ),
               ),
             ),
-            // Puedes añadir más elementos como objetivos u obstáculos aquí
           ],
         ),
       ),
     );
   }
 
-  // Método para mostrar el mensaje de pérdida
   void _mostrarMensajePerdida() {
-    // Pausa la suscripción al acelerómetro
     _accelerometerSubscription?.pause();
 
     showDialog(
       context: context,
-      barrierDismissible: false, // Evita cerrar el diálogo tocando fuera
+      barrierDismissible: false,
       builder: (context) => AlertDialog(
         title: const Text('¡Has perdido!'),
         content: const Text('La bola ha tocado el borde.'),
@@ -224,12 +209,10 @@ class _SensorScreenState extends State<SensorScreen> {
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
-              // Reiniciar el juego
               setState(() {
                 posX = gameAreaWidth / 2 - ballSize / 2;
                 posY = gameAreaHeight / 2 - ballSize / 2;
               });
-              // Reanuda la suscripción al acelerómetro
               _accelerometerSubscription?.resume();
             },
             child: const Text('Reintentar'),
@@ -247,12 +230,10 @@ class _SensorScreenState extends State<SensorScreen> {
       ),
       body: Column(
         children: [
-          // Mostrar los datos de los sensores
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: _buildSensorData(),
           ),
-          // Mostrar el minijuego
           Expanded(
             child: _buildGame(),
           ),
