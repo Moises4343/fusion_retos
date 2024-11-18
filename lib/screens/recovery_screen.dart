@@ -290,7 +290,7 @@ class _RecoveryScreenState extends State<RecoveryScreen> {
                           ),
                         ),
                         Text(
-                          'Página ${_currentIndex + 1} de ${_users.length}',
+                          'Page ${_currentIndex + 1} / ${_users.length}',
                           style: const TextStyle(fontSize: 16),
                         ),
                         IconButton(
