@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fusion_retos_c1/screens/note_screen.dart';
+import 'package:fusion_retos_c1/screens/recovery_screen.dart';
 
 import 'chat_screen.dart';
 import 'gps_detector_screen.dart';
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 9, vsync: this);
+    _tabController = TabController(length: 10, vsync: this);
   }
 
   @override
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Tab(text: 'Mi Perfil', icon: Icon(Icons.person)),
                 Tab(text: 'Tareas', icon: Icon(Icons.task)),
                 Tab(text: 'Pokedex', icon: Icon(Icons.catching_pokemon)),
+                Tab(text: 'API-Fake', icon: Icon(Icons.cloud)),
                 Tab(text: 'GPS', icon: Icon(Icons.gps_fixed)),
                 Tab(text: 'Chatbot', icon: FaIcon(FontAwesomeIcons.robot)),
                 Tab(text: 'QR-Camera', icon: Icon(Icons.camera_alt)),
@@ -68,6 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
           const PerfilScreen(),
           const TareasScreen(),
           const PokedexScreen(),
+          const RecoveryScreen(),
           const GPSStatusScreen(),
           const ChatScreen(),
           QRScreen(),

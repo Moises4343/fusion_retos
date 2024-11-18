@@ -8,7 +8,7 @@ class PerfilScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mis Datos'),
+        title: const Text('Recuperación corte 1'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -25,17 +25,27 @@ class PerfilScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nombre completo:',
+                      'Carrera:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     SizedBox(height: 6),
-                    Text('Moisés De Jesús Anzueto González'),
+                    Text('Ingeniería en Software'),
                     SizedBox(height: 12),
                     Text(
-                      'Cuatrimestre y grupo:',
+                      'Materia:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 6),
+                    Text('Programación para móviles II'),
+                    SizedBox(height: 12),
+                    Text(
+                      'Grupo:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
@@ -45,24 +55,24 @@ class PerfilScreen extends StatelessWidget {
                     Text('9°B'),
                     SizedBox(height: 12),
                     Text(
-                      'Número de teléfono:',
+                      'Nombre del alumno:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     SizedBox(height: 6),
-                    Text('961-326-7127'),
+                    Text('Moisés De Jesús Anzueto González'),
                     SizedBox(height: 12),
                     Text(
-                      'Correo electrónico:',
+                      'Matricula:',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                     ),
                     SizedBox(height: 6),
-                    Text('193243@ids.upchiapas.edu.mx'),
+                    Text('193243'),
                   ],
                 ),
               ),
@@ -75,7 +85,7 @@ class PerfilScreen extends StatelessWidget {
                 columns: const <DataColumn>[
                   DataColumn(
                     label: Text(
-                      'Imagen',
+                      'Logo',
                       style: TextStyle(fontStyle: FontStyle.italic),
                     ),
                   ),
