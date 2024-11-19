@@ -275,7 +275,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CircleAvatar(
-                    child: Icon(Icons.android),
+                    child: Icon(Icons.smart_toy),
                   ),
                   SizedBox(width: 8),
                   CircularProgressIndicator(),
