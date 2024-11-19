@@ -170,7 +170,7 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         if (!isUser)
           const CircleAvatar(
-            child: Icon(Icons.android),
+            child: Icon(Icons.smart_toy),
           ),
         if (!isUser) const SizedBox(width: 8),
         Flexible(
@@ -246,7 +246,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void dispose() {
-    _controller.dispose(); // Limpia el controller
+    _controller.dispose();
     _speech.stop();
     _flutterTts.stop();
     _scrollController.dispose();
